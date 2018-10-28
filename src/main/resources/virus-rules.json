@@ -1,0 +1,39 @@
+{
+	"rulesByStartGeneneration" : [
+		{
+			"startGeneration" : 0,
+			"rules" : [
+				{
+					"initialState" : "alive",
+					"neighborType" : "all",
+					"condition" : "< 2"
+				},
+				{
+					"initialState" : "alive",
+					"neighborType" : "all",
+					"condition" : "> 3"
+				},
+				{
+					"initialState" : "dead",
+					"neighborType" : "all",
+					"condition" : "= 3"
+				}
+			]
+		},
+		{
+			"startGeneration" : "input",
+			"rules" : [
+				{
+					"initialState" : "dead",
+					"neighborType" : "all",
+					"condition" : "= 1"
+				},
+				{
+					"initialState" : "alive",
+					"neighborType" : "ortogonal",
+					"condition" : "= 0"
+				}
+			]
+		}
+	]
+}

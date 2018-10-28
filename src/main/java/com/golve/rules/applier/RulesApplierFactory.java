@@ -1,23 +1,34 @@
 package com.golve.rules.applier;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
+import com.golve.rules.parser.JsonRulesFileParser;
 import com.golve.rules.rule.EqualityType;
 import com.golve.rules.rule.NeighborType;
 import com.golve.rules.rule.Rule;
 
 /**
- * factory of {@link RulesApplier} objects
+ * factory of {@link RulesApplier} objects. currently supported:<br/>
+ * traditional-rules applier (predefined rules, no need for rules json file)
+ * virus-mode-rules applier (predefined rules, no need for rules json file)
+ * custom-rules applier (rules are read from an external json file)
+ * 
  * @author pazb
  *
  */
-// TODO [test] - write tests for this class
-// TODO [improvement] - read the rules from external file
 public class RulesApplierFactory {
+	
+	/**
+	 * get a {@link RulesApplier} object based on rules written in an external file<br/>
+	 * <b> only .json file supported at the moment</b>
+	 * @param externalJsonFilePath path to custom rules file on disk
+	 * @return
+	 * @throws Exception 
+	 */
+	public static RulesApplier getCustomRulesApplier(String externalJsonFilePath, List<String> userInput) throws Exception {
+		RulesData rulesData = new JsonRulesFileParser(userInput).getRulesData(externalJsonFilePath);
+		return new RulesApplier(rulesData);
+	}
 	
 	public static RulesApplier getTraditionalRulesApplier() {
 		return new RulesApplier(getTraditionalRulesData());
@@ -27,31 +38,27 @@ public class RulesApplierFactory {
 		return new RulesApplier(getVirusRulesData(virusStartGeneration));
 	}
 	
-	private static List<Entry<Integer,List<Rule>>> getTraditionalRulesData() {
+	private static RulesData getTraditionalRulesData() {
 		
-		List<Entry<Integer,List<Rule>>> ret = new ArrayList<Map.Entry<Integer,List<Rule>>>();
-		List<Rule> rules = new ArrayList<Rule>();
+		RulesData ret = new RulesData();
 		
-		rules.add(new Rule(true, NeighborType.ALL, EqualityType.LESS, 2));
-		rules.add(new Rule(true, NeighborType.ALL, EqualityType.GREATER, 3));
-		rules.add(new Rule(false, NeighborType.ALL, EqualityType.EQUALS, 3));
-		
-		ret.add(new AbstractMap.SimpleEntry<Integer, List<Rule>>(0, rules));
+		ret.addRule(new Rule(true, NeighborType.ALL, EqualityType.LESS, 2), 0);
+		ret.addRule(new Rule(true, NeighborType.ALL, EqualityType.GREATER, 3), 0);
+		ret.addRule(new Rule(false, NeighborType.ALL, EqualityType.EQUALS, 3), 0);
 		
 		return ret;
 	}
 	
-	private static List<Entry<Integer,List<Rule>>> getVirusRulesData(int virusStartGeneration) {
-		List<Entry<Integer,List<Rule>>> ret = new ArrayList<Map.Entry<Integer,List<Rule>>>();
-		List<Rule> rules = new ArrayList<Rule>();
+	private static RulesData getVirusRulesData(int virusStartGeneration) {
+		RulesData ret = new RulesData();
 		
-		rules.add(new Rule(false, NeighborType.ALL, EqualityType.EQUALS, 1));
-		rules.add(new Rule(true, NeighborType.ORTOGONAL, EqualityType.EQUALS, 0));
+		ret.addRule(new Rule(false, NeighborType.ALL, EqualityType.EQUALS, 1), virusStartGeneration);
+		ret.addRule(new Rule(true, NeighborType.ORTOGONAL, EqualityType.EQUALS, 0), virusStartGeneration);
 		
-		ret.add(new AbstractMap.SimpleEntry<Integer, List<Rule>>(virusStartGeneration, rules));
-		
-		ret.addAll(getTraditionalRulesData());
-		
+		ret.addRule(new Rule(true, NeighborType.ALL, EqualityType.LESS, 2), 0);
+		ret.addRule(new Rule(true, NeighborType.ALL, EqualityType.GREATER, 3), 0);
+		ret.addRule(new Rule(false, NeighborType.ALL, EqualityType.EQUALS, 3), 0);
+				
 		return ret;
 	}
 	
