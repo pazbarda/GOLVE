@@ -2,7 +2,7 @@
  GOLVE
 Game Of Life, Virus Edition
 
-What is GOL-VE? -- 
+What is GOL-VE? -- <br/>
 Game Of Life, Virus Edition - the traditional Game Of Life game (https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) 
 with a virus twist: starting a pre-defined generation, a virus spreads! the horror!! and in the new order, these are the rules:
 1. Any dead cell with a single live neighbor lives on to the next generation.
