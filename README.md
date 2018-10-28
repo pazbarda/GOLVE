@@ -9,7 +9,7 @@ with a virus twist: starting a pre-defined generation, a virus spreads! the horr
 2. Any live cell with no horizontal or vertical live neighbors dies.
  <br/>
 Why is GOL-VE useful --  <br/>
-It's a nice excersize and also a fun game. who needs Fortnite.
+It's a nice excersize and also a fun game. who needs Fortnite. <br/>
  <br/>
 How users can get started with the GOLVE --  <br/>
 execute main with the following args - width, height, infect-after, max-generations, seed, interval <br/>
