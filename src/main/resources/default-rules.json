@@ -1,0 +1,24 @@
+{
+	"rulesByStartGeneneration" : [
+		{
+			"startGeneration" : 0,
+			"rules" : [
+				{
+					"initialState" : "alive",
+					"neighborType" : "all",
+					"condition" : "< 2"
+				},
+				{
+					"initialState" : "alive",
+					"neighborType" : "all",
+					"condition" : "> 3"
+				},
+				{
+					"initialState" : "dead",
+					"neighborType" : "all",
+					"condition" : "= 3"
+				}
+			]
+		}
+	]
+}

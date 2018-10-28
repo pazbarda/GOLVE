@@ -4,7 +4,7 @@ import com.golve.universe.Universe;
 
 /**
  * client delegate represents a client of the application.
- * its main responsibility is to act upon a new generation on behalf of the client.
+ * its main responsibility is to act upon a new generation.
  * 
  * (example - for a local client, the delegate is expected to print the generation output to console)
  * 

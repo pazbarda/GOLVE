@@ -5,6 +5,13 @@ import java.util.Arrays;
 import com.golve.rules.applier.RulesApplier;
 import com.golve.rules.rule.NeighborType;
 
+//TODO [test] - write tests for this class
+
+/**
+ * implementation of a GOL universe.
+ * @author pazb
+ *
+ */
 public class Universe {
 	
 	private static final String SPC = " ";
@@ -40,10 +47,18 @@ public class Universe {
 		this.generation = 0;
 	}
 	
+	/**
+	 * use a {@link RulesApplier} to apply rules on this universe.
+	 * @param rulesApplier
+	 */
 	public void newGeneration(RulesApplier rulesApplier) {
 		cells = rulesApplier.apply(this, ++generation).cells;
 	}
 	
+	/**
+	 * duplicate the universe
+	 * @return
+	 */
 	public Universe duplicate() {
 		int height = cells.length;
 		int width = cells[0].length;
@@ -73,10 +88,21 @@ public class Universe {
 		return width;
 	}
 	
+	/**
+	 * get the univer's current generation
+	 * @return
+	 */
 	public int getGeneration() {
 		return generation;
 	}
 
+	/**
+	 * get the total number of live neighbors of cell
+	 * @param i
+	 * @param j
+	 * @param neighborType
+	 * @return get the total number of live neighbors of the cell at [i,j]
+	 */
 	public int getTotalLiveNeighbors(int i, int j, NeighborType neighborType) {
 		int liveSum = 0;
 		int[][] neighborOffsets = neighborType.getOffsets();
@@ -91,6 +117,11 @@ public class Universe {
 		return liveSum;
 	}
 	
+	/**
+	 * flip the state of a cell (alive->dead or dead->alive)
+	 * @param i
+	 * @param j
+	 */
 	public void toggle(int i, int j) {
 		if (cells[i][j] > 0) {
 			cells[i][j]=0;
@@ -152,29 +183,10 @@ public class Universe {
 		Universe other = (Universe) obj;
 		if (!Arrays.deepEquals(cells, other.cells))
 			return false;
-//		if (generation != other.generation)
-//			return false;
-//		if (height != other.height)
-//			return false;
-//		if (width != other.width)
-//			return false;
 		return true;
 	}
 
 	private boolean isValidLocation(int i, int j) {
 		return (i>=0 && j>=0 && i<height && j<width);
 	}
-	
-	
-	// TODO - remove commented code
-//	private int[][] duplicateCells() {
-//		int[][] ret = new int[height][width];
-//		for (int i=0; i<cells.length; i++) {
-//			for (int j=0;j<cells[i].length;j++) {
-//				ret[i][j] = cells[i][j];
-//			}
-//		}
-//		return ret;
-//	}
-	
 }
