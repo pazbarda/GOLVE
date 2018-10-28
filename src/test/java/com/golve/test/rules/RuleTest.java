@@ -15,6 +15,7 @@ import com.golve.rules.rule.NeighborType;
 import com.golve.rules.rule.Rule;
 import com.golve.universe.Universe;
 
+
 /**
  * test {@link Rule} functionality, mainly its {@link Rule#doesApply(Universe, int, int)} method which is crucial to the game
  * @author pazb
