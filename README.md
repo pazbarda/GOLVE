@@ -25,4 +25,12 @@ pazbarda@gmail.com. that's me. <br/>
  <br/>
 Who maintains and contributes to GOLVE --  <br/>
 pazbarda@gmail.com. that's also me. <br/>
-
+ <br/>
+ Code and Design --  <br/>
+ The application creates a game session for each client, runs the client's seed universe for the client's predefined max generations
+ and displays each generation outcome. <br/> when last generation passed the session ends and app will close. <br/>
+ application main is written with a single session for a single user, but it can be easily changed to handle several clients with several auto-closing sessions. <br/>
+ current client implementation is merely the local console output, but it could easily be implemented to act as delegate for remote client etc. <br/>
+ the default rules are the virus rules, but user (client) can specify an external file (only json supported, at the moment) with their own wako rules :) it's really fun you should try it! <br/>
+ test coverage - not great, only 2 classes are covered, BUT - the existing tests indirectly test some functionality of other classes, so for the given time for the task it seems decent (to me at least :)) <br/>
+ room for improvements - lots. in several places in the code there are 'TODO' comments where obviouse improvements are needed, including missing tests.
